@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import orderRouter from './routers/OderRouter.js';
 import path from 'path';
 import uploadRouter from './routers/uploadRouter.js';
+import productRouterpg from './routers/ProductRouterPostgreSql.js';
 
 dotenv.config();
 const app = express();
@@ -31,6 +32,7 @@ app.get('/api/config/paypal', (_req, res) => {
 
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
+app.use('/api/productspg', productRouterpg);
 app.use('/api/orders', orderRouter);
 const __dirname = path.resolve();
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
