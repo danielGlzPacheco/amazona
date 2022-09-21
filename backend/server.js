@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 import orderRouter from './routers/OderRouter.js';
 import path from 'path';
 import uploadRouter from './routers/uploadRouter.js';
-import productRouterpg from './routers/ProductRouterPostgreSql.js';
+import productRouterpg from './routers/ProductRouterPg.js';
 
 dotenv.config();
 const app = express();
@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api/uploads', uploadRouter);
 
-mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/amazona', {
+mongoose.connect('mongodb://localhost/amazona', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -32,16 +32,18 @@ app.get('/api/config/paypal', (_req, res) => {
 
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
-app.use('/api/productspg', productRouterpg);
 app.use('/api/orders', orderRouter);
+
+app.use('/api/producspg', productRouterpg);
+
 const __dirname = path.resolve();
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
-app.use((err, req, res) => {
+app.use((req, res, err) => {
   res.status(500).send({ message: err.message });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 app.listen(PORT, () => {
   console.log('Server running in: http://localhost:' + PORT);
 });
