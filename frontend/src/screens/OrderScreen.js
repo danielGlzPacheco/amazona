@@ -40,7 +40,8 @@ export default function OrderScreen() {
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
     <div>
-      <h1>Order {order._id}</h1>
+      <Link to="/orderhistory">Go to orders</Link>
+      <h1>Order {order.order_id}</h1>
 
       <div className="row top">
         <div className="col-2">
@@ -84,7 +85,7 @@ export default function OrderScreen() {
                 <h2>Order Items</h2>
                 <ul>
                   {order.orderItems.map((item) => (
-                    <li key={item.product}>
+                    <li key={item.product_id}>
                       <div className="row">
                         <div>
                           <img

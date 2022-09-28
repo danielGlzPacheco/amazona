@@ -36,10 +36,10 @@ export default function OrderHistoryScreen(props) {
           </thead>
           <tbody>
             {orders.map((order) => (
-              <tr key={order._id}>
-                <td>{order._id}</td>
-                <td>{order.createdAt.substring(0, 10)}</td>
-                <td>{order.totalPrice.toFixed(2)}</td>
+              <tr key={order.order_id}>
+                <td>{order.order_id}</td>
+                <td>{order.date}</td>
+                <td>${order.itemsPrice + order.taxPrice}</td>
                 <td>{order.isPaid ? order.paidAt.substring(0, 10) : 'No'}</td>
                 <td>
                   {order.isDelivered
@@ -51,7 +51,7 @@ export default function OrderHistoryScreen(props) {
                     type="button"
                     className="small"
                     onClick={() => {
-                      navigate(`/order/${order._id}`);
+                      navigate(`/order/${order.order_id}`);
                     }}
                   >
                     Details

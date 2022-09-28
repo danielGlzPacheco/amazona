@@ -37,7 +37,7 @@ export default function ProfileScreen() {
 
     if (!user) {
       dispatch({ type: USER_UPDATE_PROFILE_RESET });
-      dispatch(detailsUser(userInfo._id));
+      dispatch(detailsUser(userInfo.id));
     } else {
       setName(userInfo.name);
       setEmail(userInfo.email);
@@ -57,7 +57,7 @@ export default function ProfileScreen() {
     } else {
       dispatch(
         updateUserProfile({
-          userId: user._id,
+          userId: user.id,
           name,
           email,
           password,

@@ -1,6 +1,6 @@
 import express from 'express';
 import data from '../data.js';
-import Product from '../models/productModel.js';
+import Product from '../models/ProductModel.js';
 import expressAsyncHandler from 'express-async-handler';
 import { isAdmin, isAuth } from '../utils.js';
 

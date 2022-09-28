@@ -138,8 +138,8 @@ img {
   border-radius: 0.5rem;
 }
 img.medium {
-  max-width: 29rem;
-  width: 100%;
+  width: 26rem;
+  max-height: 26rem;
 }
 img.large {
   width: 100%;
@@ -164,6 +164,12 @@ img.small{
 }
 .price {
   font-size: 2rem;
+}
+
+.stock{
+  font-size: 1.4rem;
+  text-align: right;
+  width: 100%;
 }
 
 /* Rating */

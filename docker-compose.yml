@@ -1,0 +1,44 @@
+version: "3.9"  
+services:
+  server:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - dbserver
+    links:
+      - dbserver
+    environment:
+      - PGPASSWORD=masterkey
+      - PGUSER=postgres
+      - PGDATABASE=postgres
+      - PGHOST=dbserver
+      - PGPORT=5432
+    container_name: appserver
+
+  dbserver:
+    image: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - C:\Users\KQGDDZT\Documents\postgreSql\data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=masterkey
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+    container_name: appdbserver
+ 
+  appfronten:
+    build: ./frontend/.
+    ports:
+      - "3000:3000"
+    environment:
+      - HOSTBACKEND=server
+      - PORTBACKEND=5000
+      - PROXY=server:5000/
+    depends_on:
+      - server
+    links:
+      - server
+    container_name: appfronten
+

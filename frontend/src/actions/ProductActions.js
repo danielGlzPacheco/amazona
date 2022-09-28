@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import { URL_BACKEND } from '../constants/BackendConstants';
 import {
   PRODUCT_DETAILS_FAIL,
   PRODUCT_DETAILS_REQUEST,
@@ -22,7 +23,7 @@ export const listProducts = () => async (dispatch) => {
     type: PRODUCT_LIST_REQUEST,
   });
   try {
-    const { data } = await Axios.get('/api/products');
+    const { data } = await Axios.get(`/api/producspg`);
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
@@ -32,7 +33,7 @@ export const listProducts = () => async (dispatch) => {
 export const detailsProduct = (productId) => async (dispatch) => {
   dispatch({ type: PRODUCT_DETAILS_REQUEST, payload: productId });
   try {
-    const { data } = await Axios.get(`/api/products/${productId}`);
+    const { data } = await Axios.get(`/api/producspg/${productId}`);
     dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -52,7 +53,7 @@ export const createProduct = () => async (dispatch, getState) => {
   } = getState();
   try {
     const { data } = await Axios.post(
-      '/api/products',
+      `/api/producspg`,
       {},
       {
         headers: { Authorization: `Bearer ${userInfo.token}` },
@@ -77,9 +78,10 @@ export const updateProduct = (product) => async (dispatch, getState) => {
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = await Axios.put(`/api/products/${product._id}`, product, {
+    const { data } = await Axios.put(`/api/producspg/${product.id}`, product, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
+
     dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: data });
   } catch (error) {
     const message =
@@ -96,7 +98,7 @@ export const deleteProduct = (productId) => async (dispatch, getState) => {
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = Axios.delete(`/api/products/${productId}`, {
+    const { data } = Axios.delete(`/api/producspg/${productId}`, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
     dispatch({ type: PRODUCT_DELETE_SUCCESS, payload: data });

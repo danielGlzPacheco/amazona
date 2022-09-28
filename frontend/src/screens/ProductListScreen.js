@@ -40,12 +40,12 @@ export default function ProductListScreen() {
   useEffect(() => {
     if (successCreate) {
       dispatch({ type: PRODUCT_CREATE_RESET });
-      navigate(`/product/edit/${createdProduct._id}`);
+      navigate(`/product/edit/${createdProduct.id}`);
     }
     if (successDelete) {
       dispatch({ type: PRODUCT_DELETE_RESET });
     }
-    dispatch(listProducts({ seller: sellerMode ? userInfo._id : '' }));
+    dispatch(listProducts({ seller: sellerMode ? userInfo.id : '' }));
   }, [
     createdProduct,
     dispatch,
@@ -53,12 +53,12 @@ export default function ProductListScreen() {
     sellerMode,
     successCreate,
     successDelete,
-    userInfo._id,
+    userInfo.id,
   ]);
 
   const deleteHandler = (product) => {
     if (window.confirm('Are you sure to delete?')) {
-      dispatch(deleteProduct(product._id));
+      dispatch(deleteProduct(product.id));
     }
   };
   const createHandler = () => {
@@ -87,7 +87,6 @@ export default function ProductListScreen() {
           <table className="table">
             <thead>
               <tr>
-                <th>ID</th>
                 <th>NAME</th>
                 <th>PRICE</th>
                 <th>CATEGORY</th>
@@ -97,8 +96,7 @@ export default function ProductListScreen() {
             </thead>
             <tbody>
               {products.map((product) => (
-                <tr key={product._id}>
-                  <td>{product._id}</td>
+                <tr key={product.id}>
                   <td>{product.name}</td>
                   <td>${product.price}</td>
                   <td>{product.category}</td>
@@ -107,7 +105,7 @@ export default function ProductListScreen() {
                     <button
                       type="button"
                       className="small"
-                      onClick={() => navigate(`/product/edit/${product._id}`)}
+                      onClick={() => navigate(`/product/edit/${product.id}`)}
                     >
                       Edit
                     </button>

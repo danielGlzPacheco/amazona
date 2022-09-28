@@ -37,7 +37,8 @@ export default function ProductEditScreen() {
     if (successUpdate) {
       navigate('/productlist');
     }
-    if (!product || product._id !== id || successUpdate) {
+
+    if (!product || product.id != id) {
       dispatch({ type: PRODUCT_UPDATE_RESET });
       dispatch(detailsProduct(id));
     } else {
@@ -56,7 +57,7 @@ export default function ProductEditScreen() {
     // TODO: dispatch update product
     dispatch(
       updateProduct({
-        _id: id,
+        id,
         name,
         price,
         image,
