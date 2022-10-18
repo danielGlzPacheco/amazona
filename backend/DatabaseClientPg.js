@@ -1,9 +1,11 @@
 import { Client } from 'ts-postgres';
+import express from 'express';
+import expressAsyncHandler from 'express-async-handler';
 
 export const clientpg = new Client({
-  user: process.env.PGUSER || 'postgres',
-  host: process.env.PGHOST || 'localhost',
-  database: process.env.PGDATABASE || 'postgres',
-  password: process.env.PGPASSWORD || 'masterkey',
-  port: process.env.PGPORT || 5432,
+  user: 'postgres',
+  host: 'localhost',
+  database: 'postgres',
+  password: 'masterkey',
+  port: 5432,
 });
