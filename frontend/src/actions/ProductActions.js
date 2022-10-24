@@ -1,5 +1,4 @@
 import Axios from 'axios';
-import { URL_BACKEND } from '../constants/BackendConstants';
 import {
   PRODUCT_DETAILS_FAIL,
   PRODUCT_DETAILS_REQUEST,
